@@ -38,12 +38,7 @@
         "laminas/laminas-cli": "^1.1.1"
     },
     "require-dev": {
-        "laminas/laminas-modulemanager": "^2.10",
-        "laminas/laminas-view": "^2.12",
-        "laminas/laminas-log": "^2.13",
-        "laminas/laminas-i18n": "^2.11",
-        "laminas/laminas-serializer": "^2.10",
-        "phpunit/phpunit": "^9"
+        "wikimedia/composer-merge-plugin": "^2.0"
     },
     "suggest": {
         "doctrine/doctrine-orm-module": "If you use Doctrine in combination with Laminas",
@@ -59,6 +54,12 @@
             "component-whitelist": [
                 "slm/queue"
             ]
+        },
+        "merge-plugin": {
+            "include": [
+                "composer.dev.json"
+            ],
+            "replace": true
         }
     },
     "autoload": {
@@ -70,5 +71,12 @@
         "psr-4": {
             "SlmQueueDoctrineTest\\": "tests/src"
         }
+    },
+    "scripts": {
+        "test": [
+            "phpunit",
+            "@composer test --working-dir=tests/laminas-runner",
+            "@composer test --working-dir=tests/mezzio-runner"
+        ]
     }
 }
